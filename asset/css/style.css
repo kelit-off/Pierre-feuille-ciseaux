@@ -16,10 +16,21 @@ html[date-theme="dark"] {
     border-radius: 0.5rem;
 }
 
-#LandingPage {
+#startGame {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 98vh;
+}
+
+img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+#GameChoix img {
+    cursor: pointer;
+    background-color: black;
 }

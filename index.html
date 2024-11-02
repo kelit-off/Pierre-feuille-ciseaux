@@ -9,12 +9,26 @@
 </head>
 <body>
     <main>
-        <article id="LandingPage">
+        <article id="startGame">
             <h1>Jeu Pierre-feuille-ciseaux</h1>
-            <button type="button" class="btn btn-start" onclick="Commencer()">Commencer</button>
+            <button type="button" class="btn btn-start">Commencer</button>
         </article>
-        <article id="GamePage">
-
+        <article class="d-none" id="GamePage">
+            <div>
+                <div></div>
+                <div>VS</div>
+                <div></div>
+            </div>
+            <div class="d-flex flex-row justify-content-between" id="GameChoix">
+                <img src="./asset/img/pierre.png" alt="" data-choix="1">
+                <img src="./asset/img/feuille.png" alt="" data-choix="2">
+                <img src="./asset/img/ciseaux.png" alt="" data-choix="3">
+            </div>
+            <div>
+                <p>Joueur: <span>0</span></p>
+                <p>Ordinateur: <span>0</span></p>
+            </div>
+            <button type="button" class="btn">Reset</button>
         </article>
     </main>
     <script src="./asset/js/main.js"></script>
