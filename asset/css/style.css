@@ -1,36 +1,51 @@
-html[date-theme="light"] {
-    
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-html[date-theme="dark"] {
-
-}
-
-.d-none {
-    display: none !important;
-}
-
-.btn {
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-}
-
-#startGame {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 98vh;
-}
-
-img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+h1 {
+    color: #444;
 }
 
 #GameChoix img {
+    width: 100px;
     cursor: pointer;
-    background-color: black;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+#GameChoix img:hover {
+    transform: scale(1.1);
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.choice-buttons {
+    margin: 20px 0;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.d-none {
+    display: none;
 }

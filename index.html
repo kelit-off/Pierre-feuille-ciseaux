@@ -3,34 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu Pierre-feuille-ciseaux</title>
-
+    <title>Shi Fou Mi</title>
     <link rel="stylesheet" href="./asset/css/style.css">
 </head>
 <body>
     <main>
         <article id="startGame">
-            <h1>Jeu Pierre-feuille-ciseaux</h1>
+            <h1>Jeu Shi Fou Mi</h1>
             <button type="button" class="btn btn-start">Commencer</button>
         </article>
+
         <article class="d-none" id="GamePage">
-            <div>
-                <div></div>
+            <div class="scoreboard">
+                <p>Joueur: <span id="scoreJoueur">0</span></p>
+                <p>Ordinateur: <span id="scoreOrdinateur">0</span></p>
+            </div>
+
+            <div class="choices">
+                <div id="playerChoice"></div>
                 <div>VS</div>
-                <div></div>
+                <div id="computerChoice"></div>
             </div>
-            <div class="d-flex flex-row justify-content-between" id="GameChoix">
-                <img src="./asset/img/pierre.png" alt="" data-choix="1">
-                <img src="./asset/img/feuille.png" alt="" data-choix="2">
-                <img src="./asset/img/ciseaux.png" alt="" data-choix="3">
+
+            <div id="GameChoix" class="choice-buttons">
+                <img src="./asset/img/pierre.png" alt="Pierre" data-choix="1">
+                <img src="./asset/img/feuille.png" alt="Feuille" data-choix="2">
+                <img src="./asset/img/ciseaux.png" alt="Ciseaux" data-choix="3">
             </div>
-            <div>
-                <p>Joueur: <span>0</span></p>
-                <p>Ordinateur: <span>0</span></p>
-            </div>
-            <button type="button" class="btn">Reset</button>
+
+            <p id="gameResult"></p>
+            <button type="button" class="btn" id="resetBtn">Reset</button>
         </article>
     </main>
+
     <script src="./asset/js/main.js"></script>
 </body>
 </html>

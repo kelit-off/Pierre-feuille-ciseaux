@@ -1,62 +1,107 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('#startGame button').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    // Bouton pour commencer le jeu
+    document.querySelector('#startGame button').addEventListener('click', function () {
         document.querySelector('#startGame').classList.add('d-none');
         document.querySelector('#GamePage').classList.remove('d-none');
     });
-    
-    document.querySelector('#GamePage button').addEventListener('click', function() {
-        document.querySelector('#GamePage span').innerText = '0'
+
+    // Bouton pour réinitialiser le jeu
+    document.querySelector('#resetBtn').addEventListener('click', function () {
+        resetGame();
     });
-    
+
+    // Ajout des événements sur les choix du joueur
     document.querySelectorAll('#GameChoix img').forEach(element => {
-        element.addEventListener('click', function() {
-            Jeu(this.getAttribute('data-choix'))
+        element.addEventListener('click', function () {
+            const playerChoice = parseInt(this.getAttribute('data-choix'), 10);
+            playRound(playerChoice);
         });
     });
-})
+});
 
-// Tableau des gagnant et egalite
+// Tableau pour vérifier les résultats
 const Tableau = {
     gagne: [103, 201, 302],
     egalite: [101, 202, 303],
     perdant: [102, 203, 301]
 };
 
-const choixOrdinateur = [
-    100,200,300
-]
+// Choix de l'ordinateur
+const choixOrdinateur = [100, 200, 300];
 
-function Jeu(choix) {
-    choix = parseInt(choix, 10);
-    console.log(choix)
-    const totalAddition = getChoixOrdinateur() + choix
-    console.log(totalAddition)
-    let gagnant = getGagnant(totalAddition);
-    if (gagnant === true) {
-        console.log("Vous avez gagné !");
-    } else if (gagnant === false) {
-        console.log("Vous avez perdu.");
-    } else if (gagnant === null) {
-        console.log("Égalité !");
-    } else {
-        console.log("Résultat inconnu.");
-    }
+// Fonction pour jouer un tour
+function playRound(playerChoice) {
+    const computerChoice = getChoixOrdinateur();
+    const total = computerChoice + playerChoice;
+
+    // Déterminer le gagnant
+    const resultat = getGagnant(total);
+
+    // Afficher le résultat et actualiser les scores
+    renderResult(playerChoice, computerChoice, resultat);
 }
 
+// Générer un choix aléatoire pour l'ordinateur
 function getChoixOrdinateur() {
-    const randomindex = Math.floor(Math.random() * choixOrdinateur.length)
-    return choixOrdinateur[randomindex]
+    const randomIndex = Math.floor(Math.random() * choixOrdinateur.length);
+    return choixOrdinateur[randomIndex];
 }
 
-function getGagnant(choix) {
-    if (Tableau.gagne.includes(choix)) {
-        return true;
-    } else if (Tableau.perdant.includes(choix)) {
-        return false;
-    } else if (Tableau.egalite.includes(choix)) {
-        return null;
-    } else {
-        console.log("Le choix ne correspond à aucun résultat connu.");
-        return undefined;
+// Déterminer le gagnant
+function getGagnant(total) {
+    if (Tableau.gagne.includes(total)) {
+        return 'gagne';
+    } else if (Tableau.perdant.includes(total)) {
+        return 'perd';
+    } else if (Tableau.egalite.includes(total)) {
+        return 'egalite';
     }
+    return null;
+}
+
+// Afficher le résultat et mettre à jour les scores
+function renderResult(playerChoice, computerChoice, resultat) {
+    // Afficher les choix
+    document.querySelector('#playerChoice').innerText = getNomChoix(playerChoice);
+    document.querySelector('#computerChoice').innerText = getNomChoix(computerChoice);
+
+    const resultElement = document.querySelector('#gameResult');
+    const scoreJoueur = document.querySelector('#scoreJoueur');
+    const scoreOrdinateur = document.querySelector('#scoreOrdinateur');
+
+    if (resultat === 'gagne') {
+        resultElement.innerText = 'Vous avez gagné ! 🎉';
+        scoreJoueur.innerText = parseInt(scoreJoueur.innerText, 10) + 1;
+    } else if (resultat === 'perd') {
+        resultElement.innerText = 'Vous avez perdu... 😢';
+        scoreOrdinateur.innerText = parseInt(scoreOrdinateur.innerText, 10) + 1;
+    } else if (resultat === 'egalite') {
+        resultElement.innerText = 'Égalité !';
+    }
+}
+
+// Récupérer le nom du choix pour l'affichage
+function getNomChoix(choix) {
+    switch (choix) {
+        case 1:
+        case 100:
+            return 'Pierre';
+        case 2:
+        case 200:
+            return 'Feuille';
+        case 3:
+        case 300:
+            return 'Ciseaux';
+        default:
+            return '';
+    }
+}
+
+// Réinitialiser le jeu
+function resetGame() {
+    document.querySelector('#scoreJoueur').innerText = '0';
+    document.querySelector('#scoreOrdinateur').innerText = '0';
+    document.querySelector('#playerChoice').innerText = '';
+    document.querySelector('#computerChoice').innerText = '';
+    document.querySelector('#gameResult').innerText = '';
 }
